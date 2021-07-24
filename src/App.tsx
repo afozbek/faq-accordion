@@ -20,10 +20,12 @@ function App() {
       Do you provide additional support?
       Chat and email support is available 24/7. Phone lines are open during normal business hours.
 
-      <div class="attribution">
+
+      {/* Author Section */}
+      {/* <div className="attribution">
         Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-        Coded by <a href="#">Your Name Here</a>.
-      </div>
+        Coded by <a href="#">Abdullah Furkan Özbek</a>.
+      </div> */}
     </div>
   );
 }
