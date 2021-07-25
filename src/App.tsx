@@ -1,32 +1,45 @@
+import Accordion from 'components/Accordion';
 import React from 'react';
+import styled from 'styled-components';
+import { accordionList } from './utils/constants';
+import IllustrationBoxDesktop from "images/bg-pattern-desktop.svg";
 
-function App() {
+const StyledApp = styled.div`
+    height: 100vh;
+    position: relative;
+    background: ${props => props.theme.lightTheme};
+  `
+
+const StyledAccordionList = styled.div`
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  background: url(${IllustrationBoxDesktop});
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+`
+
+const App = () => {
   return (
-    <div className="App">
-      How many team members can I invite?
-      You can invite up to 2 additional users on the Free plan. There is no limit on
-      team members for the Premium plan.
+    <StyledApp className="App">
+      <StyledAccordionList className="accordionList">
 
-      What is the maximum file upload size?
-      No more than 2GB. All files in your account must fit your allotted storage space.
 
-      How do I reset my password?
-      Click “Forgot password” from the login page or “Change password” from your profile page.
-      A reset link will be emailed to you.
-
-      Can I cancel my subscription?
-      Yes! Send us a message and we’ll process your request no questions asked.
-
-      Do you provide additional support?
-      Chat and email support is available 24/7. Phone lines are open during normal business hours.
-
+        {
+          accordionList.map((accordion, i) => {
+            return <Accordion key={accordion.headline + "-" + i} {...accordion} />
+          })
+        }
+      </StyledAccordionList>
 
       {/* Author Section */}
       {/* <div className="attribution">
         Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
         Coded by <a href="#">Abdullah Furkan Özbek</a>.
       </div> */}
-    </div>
+    </StyledApp>
   );
 }
 

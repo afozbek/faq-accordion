@@ -29,6 +29,9 @@
     ],
     "@typescript-eslint/no-unused-vars": [
       1
-    ] // unused variabled
+    ], // unused variabled
+    "@typescript-eslint/explicit-module-boundary-types": [
+      0
+    ]
   }
 }
