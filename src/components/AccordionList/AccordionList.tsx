@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from "styled-components"
 import { accordionList, AccordionType } from '../../utils/constants'
-import iconArrowDown from "images/icon-arrow-down.svg";
-import { lightGrayishBlue } from 'utils/variables';
 import Accordion from 'components/Accordion/Accordion';
-
+import { useState } from 'react';
 
 const StyledAccordionList = styled.div`
   width: 50%;
@@ -24,19 +22,41 @@ const StyledAccordionList = styled.div`
 `
 
 const AccordionList = () => {
+  const [accordions, setAccordionList] = useState(accordionList);
+
+  const handleToggleAccordion = (id: string | number) => {
+    resetAccordionList
+    const newAccordionList = resetAccordionList().map(accordion => {
+      if (accordion.id == id) {
+        return { ...accordion, isOpen: true }
+      }
+      return accordion
+    });
+
+    console.log({ newAccordionList });
+
+    setAccordionList(newAccordionList);
+  }
+
+  const resetAccordionList = (): AccordionType[] => {
+    const newAccordionList = [...accordionList.map(accordion => ({ ...accordion, isOpen: false }))];
+    setAccordionList(newAccordionList)
+    return newAccordionList
+  }
+
   return (
     <StyledAccordionList className="accordion-list">
       <h1>FAQ</h1>
 
       {
-        accordionList.map((accordion, i) => {
-          if (i == 0) {
-            return <Accordion key={accordion.headline + "-" + i} {...accordion} isOpen />
-          }
-
-          return <Accordion key={accordion.headline + "-" + i} {...accordion} />
+        accordions.map((accordion, i) => {
+          return <Accordion
+            key={accordion.headline + "-" + i}
+            {...accordion}
+            handleToggleAccordion={handleToggleAccordion} />
         })
       }
+
     </StyledAccordionList>
   )
 }

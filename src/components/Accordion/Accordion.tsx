@@ -1,11 +1,9 @@
-import React from 'react'
 import styled from "styled-components"
 import { AccordionType } from '../../utils/constants'
 import iconArrowDown from "images/icon-arrow-down.svg";
 import { lightGrayishBlue, softRed, veryDarkGrayishBlue } from 'utils/variables';
 
-
-const StyledAccordion = styled.div`
+const StyledAccordion = styled.div<{ isOpen?: boolean }>`
   border-bottom: 2px solid ${lightGrayishBlue};
   padding: 15px 0;
   color: ${veryDarkGrayishBlue};
@@ -26,6 +24,10 @@ const StyledAccordion = styled.div`
 
     img {
       transform: rotate(180deg);
+
+      ${props => props.isOpen ? `
+        transform: rotate(0deg);
+      `: ""}
     }
   }
 
@@ -33,33 +35,31 @@ const StyledAccordion = styled.div`
     font-size: 10px;
     visibility: hidden;
     opacity: 0;
-    display: none;
 
-    transition: all 0.7;
+    transition: visibility 0s, opacity 0.4s linear;
+    height: 0;
 
-    &.open {
+    ${props => props.isOpen ? `
       visibility: visible;
       opacity: 1;
-      display: block;
       margin-top: 10px;
-    }
+      height: auto;
+    `: ""}
   }
 `
-
 interface Props {
-  isOpen?: boolean
+  handleToggleAccordion: (id: string | number) => void
 }
 
-
-const Accordion = ({ headline, description, isOpen }: AccordionType & Props) => {
+const Accordion = ({ headline, description, isOpen, handleToggleAccordion, id }: AccordionType & Props) => {
   console.log({ isOpen })
   return (
-    <StyledAccordion className="accordion">
+    <StyledAccordion isOpen={isOpen} onClick={() => { handleToggleAccordion(id) }}>
       <p className="headline">
         {headline}
         <img src={iconArrowDown} alt="Icon Arrow Down" />
       </p>
-      <p className={`desc ${isOpen ? "open" : ""}`}>
+      <p className="desc">
         {description}
       </p>
     </StyledAccordion>
