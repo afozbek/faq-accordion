@@ -1,30 +1,105 @@
+import Accordion from 'components/Accordion';
 import React from 'react';
+import styled from 'styled-components';
+import { accordionList } from './utils/constants';
+import BgPatternDesktop from "images/bg-pattern-desktop.svg";
+import IllustrationBoxDesktop from "images/illustration-box-desktop.svg";
+import WomanOnline from "images/illustration-woman-online-desktop.svg";
+import { softBlue, softViolet } from 'utils/variables';
+import AccordionList from 'components/AccordionList/AccordionList';
 
-function App() {
+const StyledApp = styled.div`
+  height: 100vh;
+  position: relative;
+  background: linear-gradient(${softViolet}, ${softBlue});
+  `
+const StyledIllustrationWrapper = styled.div`
+  position: relative;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: 500px;
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    z-index: 10;
+    
+    transform: translate(-50%,-50%) scale(0.8);
+    top: 60%;
+    left: 5px;
+    
+    background: url(${IllustrationBoxDesktop});
+    background-repeat: no-repeat;
+  }
+`
+const StyledAccordionWrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 800px;
+  height: 500px;
+
+  &:before { 
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;   
+    z-index: 1;
+    
+    background: url(${BgPatternDesktop});
+    background-repeat: no-repeat;
+    transform: translate(-195px,-50px);
+  } 
+
+  
+
+  .illustration {
+    position: absolute;
+    z-index: 1;
+    /* left: -50px; */
+    width: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 17%;
+
+    img {
+      /* width: 250px; */
+      /* height: 300px; */
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+`
+
+const App = () => {
   return (
-    <div className="App">
-      How many team members can I invite?
-      You can invite up to 2 additional users on the Free plan. There is no limit on
-      team members for the Premium plan.
+    <StyledApp className="App">
+      <StyledIllustrationWrapper className="illustrationWrapper">
+        <StyledAccordionWrapper className="accordionWrapper">
+          <div className="illustration">
+            <img src={WomanOnline} alt="Woman Online" />
+          </div>
 
-      What is the maximum file upload size?
-      No more than 2GB. All files in your account must fit your allotted storage space.
+          <AccordionList />
+        </StyledAccordionWrapper>
+      </StyledIllustrationWrapper>
 
-      How do I reset my password?
-      Click “Forgot password” from the login page or “Change password” from your profile page.
-      A reset link will be emailed to you.
-
-      Can I cancel my subscription?
-      Yes! Send us a message and we’ll process your request no questions asked.
-
-      Do you provide additional support?
-      Chat and email support is available 24/7. Phone lines are open during normal business hours.
-
-      <div class="attribution">
+      {/* Author Section */}
+      {/* <div className="attribution">
         Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-        Coded by <a href="#">Your Name Here</a>.
-      </div>
-    </div>
+        Coded by <a href="#">Abdullah Furkan Özbek</a>.
+      </div> */}
+    </StyledApp>
   );
 }
 
